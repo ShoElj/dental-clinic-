@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
-import { supabase } from '../services/supabaseClient';
+import { supabase } from '../../services/supabaseClient';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const history = useHistory();
 
   const handleLogin = async () => {
-    const { error } = await supabase.auth.signIn({ email, password });
+    const { error, user } = await supabase.auth.signIn({ email, password });
     if (error) {
       setError(error.message);
     } else {
-      // Redirect to dashboard or handle successful login
+      switch (user.role) {
+        case 'Super Admin':
+          history.push('/superadmin');
+          break;
+        case 'Doctor':
+          history.push('/doctor');
+          break;
+        case 'Accounts':
+          history.push('/accounts');
+          break;
+        case 'Dietitian':
+          history.push('/dietitian');
+          break;
+        default:
+          history.push('/');
+      }
     }
   };
 
