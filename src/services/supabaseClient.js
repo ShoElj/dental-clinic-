@@ -1,34 +1,34 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Import environment variables for Supabase URL and Key
-// Ensure that the environment variables are correctly set in the .env.local file
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-const supabaseKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+// Function to get environment variables
+const getEnvVariable = (key, defaultValue) => {
+  const value = import.meta.env[key] || defaultValue;
+  if (!value) {
+    throw new Error(`Missing environment variable: ${key}`);
+  }
+  return value;
+};
 
-// Check if the environment variables are defined
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Missing Supabase URL or Key. Please check your .env.local file.');
-}
+// Get Supabase URL and Key from environment variables
+const supabaseUrl = getEnvVariable('VITE_SUPABASE_URL');
+const supabaseKey = getEnvVariable('VITE_SUPABASE_ANON_KEY');
 
-// Create a Supabase client using the environment variables
+// Create Supabase client
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Function to check if the connection to Supabase is successful
+// Function to check Supabase connection
 export const checkSupabaseConnection = async () => {
   try {
-    // Attempt to fetch data from a test table
+    // Query test_table to check connection
     let { data, error } = await supabase.from('test_table').select('*').limit(1);
     
-    // If there is an error, log it and return false
     if (error) {
       console.error('Error connecting to Supabase:', error);
       return false;
     }
     
-    // If data is fetched successfully, return true
     return true;
   } catch (error) {
-    // Catch any other errors and log them
     console.error('Unexpected error:', error);
     return false;
   }
