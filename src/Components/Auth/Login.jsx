@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { supabase } from '../../services/supabaseClient';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     const { error, user } = await supabase.auth.signIn({ email, password });
@@ -15,19 +15,19 @@ const Login = () => {
     } else {
       switch (user.role) {
         case 'Super Admin':
-          history.push('/superadmin');
+          navigate('/superadmin');
           break;
         case 'Doctor':
-          history.push('/doctor');
+          navigate('/doctor');
           break;
         case 'Accounts':
-          history.push('/accounts');
+          navigate('/accounts');
           break;
         case 'Dietitian':
-          history.push('/dietitian');
+          navigate('/dietitian');
           break;
         default:
-          history.push('/');
+          navigate('/');
       }
     }
   };
