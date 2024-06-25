@@ -20,7 +20,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 export const checkSupabaseConnection = async () => {
   try {
     // Query test_table to check connection
-    let { data, error } = await supabase.from('test_table').select('*').limit(1);
+    let { data, error } = await supabase.from('users_table').select('*').limit(1);
     
     if (error) {
       console.error('Error connecting to Supabase:', error);
