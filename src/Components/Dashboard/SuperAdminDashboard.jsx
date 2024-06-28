@@ -4,7 +4,7 @@ const SuperAdminDashboard = () => {
   return (
     <div>
       <h2>Super Admin Dashboard</h2>
-      <p>Manage medical records, profiles, and medical history here.</p>
+      <p>medical records, profiles, and medical history here.</p>
     </div>
   );
 };
