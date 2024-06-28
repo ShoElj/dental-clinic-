@@ -1,12 +1,45 @@
-import React from 'react';
+// src/Components/Profiles/ViewProfile.jsx
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { supabase } from '../../services/supabaseClient';
 
 const ViewProfile = () => {
+  const { id } = useParams();
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (data) {
+        setProfile(data);
+      } else {
+        alert(error.message);
+      }
+    };
+
+    fetchProfile();
+  }, [id]);
+
   return (
     <div>
-      <h2>View Profile</h2>
-      <p>View user profiles here.</p>
+      {profile ? (
+        <div>
+          <h2>{profile.full_name}</h2>
+          <p>Date of Birth: {profile.date_of_birth}</p>
+          <p>Address: {profile.address}</p>
+          <p>Phone Number: {profile.phone_number}</p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
 
 export default ViewProfile;
+     

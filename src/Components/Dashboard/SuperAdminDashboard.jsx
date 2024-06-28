@@ -1,7 +1,6 @@
 // Importing necessary libraries and components
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import MedicalRecords from '../Records/MedicalRecords';
 import CreateProfile from '../Profiles/CreateProfile';
 import MedicalHistory from '../History/MedicalHistory';
