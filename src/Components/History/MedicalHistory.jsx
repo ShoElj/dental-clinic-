@@ -1,5 +1,6 @@
-// src/components/History/MedicalHistory.jsx
+// Importing necessary libraries and components
 import React, { useState } from 'react';
+// Importing the supabase client
 import { supabase } from '../../services/supabaseClient';
 
 const MedicalHistory = ({ create }) => {
