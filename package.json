@@ -10,8 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.43.6",
+    "@supabase/supabase-js": "^2.44.1",
     "axios": "^1.7.2",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
