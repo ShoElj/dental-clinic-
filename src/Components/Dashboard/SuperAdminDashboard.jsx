@@ -1,38 +1,46 @@
-// Importing necessary libraries and components
 import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import MedicalRecords from '../Records/MedicalRecords';
-import CreateProfile from '../Profiles/CreateProfile';
-import MedicalHistory from '../History/MedicalHistory';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'; // Importing Tab components from 'react-tabs'
+import MedicalRecords from '../Records/MedicalRecords'; // Importing MedicalRecords component
+import CreateProfile from '../Profiles/CreateProfile'; // Importing CreateProfile component
+import MedicalHistory from '../History/MedicalHistory'; // Importing MedicalHistory component
 
-// SuperAdminDashboard component to manage the super admin dashboard
+// SuperAdminDashboard component
 const SuperAdminDashboard = () => {
-  // JSX for the super admin dashboard
   return (
-    <div>
-      <h1>Super Admin Dashboard</h1>
-      <Tabs>
-        <TabList>
-          <Tab>Create Medical Record</Tab>
-          <Tab>Access Medical Records</Tab>
-          <Tab>Create Profile</Tab>
-          <Tab>Create Medical History</Tab>
-          <Tab>Access Medical History</Tab>
+    <div className="container mx-auto p-4"> // Container for the dashboard content
+      <h1 className="text-2xl font-bold mb-4">Super Admin Dashboard</h1> // Dashboard title
+      <Tabs> // Tabs component for tabbed navigation
+        <TabList className="flex border-b mb-4"> // TabList component for tab headers
+          <Tab className="px-4 py-2 cursor-pointer" selectedClassName="border-b-2 border-primary">
+            Create Medical Record
+          </Tab> // Tab for creating a medical record
+          <Tab className="px-4 py-2 cursor-pointer" selectedClassName="border-b-2 border-primary">
+            Access Medical Records
+          </Tab> // Tab for accessing medical records
+          <Tab className="px-4 py-2 cursor-pointer" selectedClassName="border-b-2 border-primary">
+            Create Profile
+          </Tab> // Tab for creating a profile
+          <Tab className="px-4 py-2 cursor-pointer" selectedClassName="border-b-2 border-primary">
+            Create Medical History
+          </Tab> // Tab for creating a medical history
+          <Tab className="px-4 py-2 cursor-pointer" selectedClassName="border-b-2 border-primary">
+            Access Medical History
+          </Tab> // Tab for accessing medical history
         </TabList>
 
-        <TabPanel>
-          <MedicalRecords create={true} />
+        <TabPanel className="mt-4"> // TabPanel for the first tab content
+          <MedicalRecords create={true} /> // MedicalRecords component for creating a record
         </TabPanel>
-        <TabPanel>
-          <MedicalRecords create={false} />
+        <TabPanel className="mt-4"> // TabPanel for the second tab content
+          <MedicalRecords create={false} /> // MedicalRecords component for accessing records
         </TabPanel>
-        <TabPanel>
-          <CreateProfile />
+        <TabPanel className="mt-4"> // TabPanel for the third tab content
+          <CreateProfile /> // CreateProfile component
         </TabPanel>
-        <TabPanel>
-          <MedicalHistory create={true} />
+        <TabPanel className="mt-4"> // TabPanel for the fourth tab content
+          <MedicalHistory create={true} /> // MedicalHistory component for creating a history
         </TabPanel>
-        <TabPanel>
+        <TabPanel className="mt-4">
           <MedicalHistory create={false} />
         </TabPanel>
       </Tabs>
@@ -40,5 +48,4 @@ const SuperAdminDashboard = () => {
   );
 };
 
-// Exporting the SuperAdminDashboard component
 export default SuperAdminDashboard;
