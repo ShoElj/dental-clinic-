@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Tabs, TabPanel } from 'react-tabs';
 import Sidebar from '../Sidebar/Sidebar';  // Adjust the import path as needed
 
 
