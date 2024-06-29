@@ -19,7 +19,7 @@ const SuperAdminDashboard = () => {
           <h1 className="text-2xl font-bold">Super Admin Dashboard</h1> {/* Another dashboard title */}
         </div>
         {/* Tabs component for navigation */}
-        <Tabs selectedIndex={selectedTab} onSelect={index => setSelectedTab(index)}>
+        <Tabs selectedIndex={setSelectedTab} onSelect={index => setSelectedTab(index)}>
           {/* Tab for creating medical records */}
           <TabPanel>
             <MedicalRecords create={true} />
@@ -40,7 +40,6 @@ const SuperAdminDashboard = () => {
           <TabPanel>
             <MedicalHistory create={false} />
           </TabPanel>
-          {/* Tab for logout */}
           <TabPanel>
             <Logout />
           </TabPanel>
@@ -50,5 +49,4 @@ const SuperAdminDashboard = () => {
   );
 };
 
-// Export the SuperAdminDashboard component
 export default SuperAdminDashboard;
