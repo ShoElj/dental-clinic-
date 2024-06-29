@@ -1,38 +1,52 @@
 import React from 'react';
-import { FaUserMd, FaFileMedical, FaHistory, FaUserPlus, FaSignOutAlt } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = ({ onSelectTab }) => {
   return (
-    <div className="bg-gray-800 text-white w-64 min-h-screen p-4">
-      <div className="flex items-center justify-center py-4">
-        <div className="text-lg font-bold">Super Admin</div>
-      </div>
-      <div className="mt-6">
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab('dashboard')}>
-          <FaUserMd className="mr-3" />
-          <span>Dashboard</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab('createRecord')}>
-          <FaFileMedical className="mr-3" />
-          <span>Create Medical Record</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab('accessRecords')}>
-          <FaFileMedical className="mr-3" />
-          <span>Access Medical Records</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab('createProfile')}>
-          <FaUserPlus className="mr-3" />
-          <span>Create Profile</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab('medicalHistory')}>
-          <FaHistory className="mr-3" />
-          <span>Access Medical History</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab('logout')}>
-          <FaSignOutAlt className="mr-3" />
-          <span>Logout</span>
-        </button>
-      </div>
+    <div className="w-64 bg-gray-800 text-white flex flex-col p-4">
+      <h2 className="text-xl font-bold mb-4">Super Admin</h2>
+      <NavLink
+        to="/superadmin"
+        className="mb-4 p-2 bg-blue-500 rounded hover:bg-blue-600"
+        activeClassName="bg-blue-700"
+      >
+        Dashboard
+      </NavLink>
+      <NavLink
+        to="/create-record"
+        className="mb-4 p-2 bg-blue-500 rounded hover:bg-blue-600"
+        activeClassName="bg-blue-700"
+      >
+        Create Medical Record
+      </NavLink>
+      <NavLink
+        to="/medical-records"
+        className="mb-4 p-2 bg-blue-500 rounded hover:bg-blue-600"
+        activeClassName="bg-blue-700"
+      >
+        Access Medical Records
+      </NavLink>
+      <NavLink
+        to="/create-profile"
+        className="mb-4 p-2 bg-blue-500 rounded hover:bg-blue-600"
+        activeClassName="bg-blue-700"
+      >
+        Create Profile
+      </NavLink>
+      <NavLink
+        to="/medical-history"
+        className="mb-4 p-2 bg-blue-500 rounded hover:bg-blue-600"
+        activeClassName="bg-blue-700"
+      >
+        Access Medical History
+      </NavLink>
+      <NavLink
+        to="/logout"
+        className="mt-auto p-2 bg-blue-500 rounded hover:bg-blue-600"
+        activeClassName="bg-blue-700"
+      >
+        Logout
+      </NavLink>
     </div>
   );
 };

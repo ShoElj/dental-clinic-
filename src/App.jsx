@@ -1,74 +1,133 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './Components/Auth/Login'; // Importing Login component for user authentication
-import Logout from './Components/Auth/Logout'; // Importing Logout component for user logout
-import Sidebar from './Components/Sidebar/Sidebar'; // Importing Sidebar component
-import SuperAdminDashboard from './Components/Dashboard/SuperAdminDashboard'; // Importing SuperAdminDashboard component
-import DoctorDashboard from './Components/Dashboard/DoctorDashboard'; // Importing DoctorDashboard component
-import AccountsDashboard from './Components/Dashboard/AccountsDashboard'; // Importing AccountsDashboard component
-import DietitianDashboard from './Components/Dashboard/DietitianDashboard'; // Importing DietitianDashboard component
-import MedicalRecords from './Components/Records/MedicalRecords'; // Importing MedicalRecords component
-import CreateRecord from './Components/Records/CreateRecord'; // Importing CreateRecord component
-import CreateProfile from './Components/Profiles/CreateProfile'; // Importing CreateProfile component
-import EditProfile from './Components/Profiles/EditProfile'; // Importing EditProfile component
-import ViewProfile from './Components/Profiles/ViewProfile'; // Importing ViewProfile component
-import MedicalHistory from './Components/History/MedicalHistory'; // Importing MedicalHistory component
+import Login from './Components/Auth/Login';
+import Logout from './Components/Auth/Logout';
+import Sidebar from './Components/Sidebar/Sidebar';
+import SuperAdminDashboard from './Components/Dashboard/SuperAdminDashboard';
+import DoctorDashboard from './Components/Dashboard/DoctorDashboard';
+import AccountsDashboard from './Components/Dashboard/AccountsDashboard';
+import DietitianDashboard from './Components/Dashboard/DietitianDashboard';
+import MedicalRecords from './Components/Records/MedicalRecords';
+import CreateRecord from './Components/Records/CreateRecord';
+import CreateProfile from './Components/Profiles/CreateProfile';
+import EditProfile from './Components/Profiles/EditProfile';
+import ViewProfile from './Components/Profiles/ViewProfile';
+import MedicalHistory from './Components/History/MedicalHistory';
 
+// Define the App component
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} /> {/* Route for user login */}
-        <Route path="/logout" element={<Logout />} /> {/* Route for user logout */}
-        
-        <Route element={<MainLayout />}>
-          {/* Dashboard Routes */}
-          <Route path="/superadmin" element={<SuperAdminDashboard />} /> {/* Route for SuperAdminDashboard */}
-          <Route path="/doctor" element={<DoctorDashboard />} /> {/* Route for DoctorDashboard */}
-          <Route path="/accounts" element={<AccountsDashboard />} /> {/* Route for AccountsDashboard */}
-          <Route path="/dietitian" element={<DietitianDashboard />} /> {/* Route for DietitianDashboard */}
-          
-          {/* Records Routes */}
-          <Route path="/medical-records" element={<MedicalRecords />} /> {/* Route for MedicalRecords */}
-          <Route path="/create-record" element={<CreateRecord />} /> {/* Route for CreateRecord */}
-          
-          {/* Profiles Routes */}
-          <Route path="/create-profile" element={<CreateProfile />} /> {/* Route for CreateProfile */}
-          <Route path="/edit-profile/:id" element={<EditProfile />} /> {/* Route for EditProfile with dynamic ID */}
-          <Route path="/view-profile/:id" element={<ViewProfile />} /> {/* Route for ViewProfile with dynamic ID */}
-          
-          {/* Medical History Route */}
-          <Route path="/medical-history/:id" element={<MedicalHistory />} /> {/* Route for MedicalHistory with dynamic ID */}
-        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+
+        {/* Dashboard Routes */}
+        <Route
+          path="/superadmin"
+          element={
+            <MainLayout>
+              <SuperAdminDashboard />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/doctor"
+          element={
+            <MainLayout>
+              <DoctorDashboard />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/accounts"
+          element={
+            <MainLayout>
+              <AccountsDashboard />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/dietitian"
+          element={
+            <MainLayout>
+              <DietitianDashboard />
+            </MainLayout>
+          }
+        />
+
+        {/* Records Routes */}
+        <Route
+          path="/medical-records"
+          element={
+            <MainLayout>
+              <MedicalRecords />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/create-record"
+          element={
+            <MainLayout>
+              <CreateRecord />
+            </MainLayout>
+          }
+        />
+
+        {/* Profiles Routes */}
+        <Route
+          path="/create-profile"
+          element={
+            <MainLayout>
+              <CreateProfile />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/edit-profile/:id"
+          element={
+            <MainLayout>
+              <EditProfile />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/view-profile/:id"
+          element={
+            <MainLayout>
+              <ViewProfile />
+            </MainLayout>
+          }
+        />
+
+        {/* Medical History Route */}
+        <Route
+          path="/medical-history/:id"
+          element={
+            <MainLayout>
+              <MedicalHistory />
+            </MainLayout>
+          }
+        />
 
         {/* Default Redirect */}
-        <Route path="*" element={<Navigate to="/login" />} /> {/* Default redirect to login page */}
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );
 };
 
-// MainLayout component that includes the Sidebar
-const MainLayout = () => {
+// Define the MainLayout component
+const MainLayout = ({ children }) => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-grow">
-        <Routes>
-          <Route path="/superadmin" element={<SuperAdminDashboard />} /> {/* Route for SuperAdminDashboard */}
-          <Route path="/doctor" element={<DoctorDashboard />} /> {/* Route for DoctorDashboard */}
-          <Route path="/accounts" element={<AccountsDashboard />} /> {/* Route for AccountsDashboard */}
-          <Route path="/dietitian" element={<DietitianDashboard />} /> {/* Route for DietitianDashboard */}
-          <Route path="/medical-records" element={<MedicalRecords />} /> {/* Route for MedicalRecords */}
-          <Route path="/create-record" element={<CreateRecord />} /> {/* Route for CreateRecord */}
-          <Route path="/create-profile" element={<CreateProfile />} /> {/* Route for CreateProfile */}
-          <Route path="/edit-profile/:id" element={<EditProfile />} /> {/* Route for EditProfile with dynamic ID */}
-          <Route path="/view-profile/:id" element={<ViewProfile />} /> {/* Route for ViewProfile with dynamic ID */}
-          <Route path="/medical-history/:id" element={<MedicalHistory />} /> {/* Route for MedicalHistory with dynamic ID */}
-        </Routes>
+      <div className="flex-grow p-6 bg-gray-100">
+        {children}
       </div>
     </div>
   );
 };
 
+// Export the App component
 export default App;
