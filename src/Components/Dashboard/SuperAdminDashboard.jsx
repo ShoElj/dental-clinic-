@@ -10,9 +10,6 @@ const SuperAdminDashboard = ({ selectedTab, onSelectTab }) => {
     <div className="flex-grow p-6 bg-gray-100">
       <h1 className="text-2xl font-bold mb-4">Super Admin Dashboard</h1>
       <div className="flex-grow p-4">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Super Admin Dashboard</h1>
-        </div>
         <Tabs selectedIndex={selectedTab} onSelect={index => onSelectTab(index)}>
           <TabPanel>
             <MedicalRecords create={true} />

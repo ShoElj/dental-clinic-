@@ -1,38 +1,89 @@
+// src/Components/Sidebar/Sidebar.jsx
 import React from 'react';
 import { FaUserMd, FaFileMedical, FaHistory, FaUserPlus, FaSignOutAlt } from "react-icons/fa";
 
 const Sidebar = ({ onSelectTab }) => {
   return (
-    <div className="bg-gray-800 text-white w-64 min-h-screen p-4">
-      <div className="flex items-center justify-center py-4">
-        <div className="text-lg font-bold">Arrayan Super Admin</div>
-      </div>
-      <div className="mt-6">
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab(0)}>
-          <FaUserMd className="mr-3" />
-          <span>Dashboard</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab(1)}>
-          <FaFileMedical className="mr-3" />
-          <span>Create Medical Record</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab(2)}>
-          <FaFileMedical className="mr-3" />
-          <span>Access Medical Records</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab(3)}>
-          <FaUserPlus className="mr-3" />
-          <span>Create Profile</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab(4)}>
-          <FaHistory className="mr-3" />
-          <span>Access Medical History</span>
-        </button>
-        <button className="flex items-center p-2 mb-4 w-full text-left hover:bg-gray-700 rounded" onClick={() => onSelectTab(5)}>
-          <FaSignOutAlt className="mr-3" />
-          <span>Logout</span>
-        </button>
-      </div>
+    <div>
+      {/* Button to toggle sidebar on small screens */}
+      <button
+        data-drawer-target="default-sidebar"
+        data-drawer-toggle="default-sidebar"
+        aria-controls="default-sidebar"
+        type="button"
+        className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      >
+        <span className="sr-only">Open sidebar</span>
+        <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path clipRule="evenodd" fillRule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+        </svg>
+      </button>
+
+      {/* Sidebar */}
+      <aside
+        id="default-sidebar"
+        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        aria-label="Sidebar"
+      >
+        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+          <ul className="space-y-2 font-medium">
+            <li>
+              <button
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full text-left"
+                onClick={() => onSelectTab(0)}
+              >
+                <FaUserMd className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="ms-3">Dashboard</span>
+              </button>
+            </li>
+            <li>
+              <button
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full text-left"
+                onClick={() => onSelectTab(1)}
+              >
+                <FaFileMedical className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="ms-3">Create Medical Record</span>
+              </button>
+            </li>
+            <li>
+              <button
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full text-left"
+                onClick={() => onSelectTab(2)}
+              >
+                <FaFileMedical className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="ms-3">Access Medical Records</span>
+              </button>
+            </li>
+            <li>
+              <button
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full text-left"
+                onClick={() => onSelectTab(3)}
+              >
+                <FaUserPlus className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="ms-3">Create Profile</span>
+              </button>
+            </li>
+            <li>
+              <button
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full text-left"
+                onClick={() => onSelectTab(4)}
+              >
+                <FaHistory className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="ms-3">Access Medical History</span>
+              </button>
+            </li>
+            <li>
+              <button
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full text-left"
+                onClick={() => onSelectTab(5)}
+              >
+                <FaSignOutAlt className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="ms-3">Logout</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </aside>
     </div>
   );
 };
