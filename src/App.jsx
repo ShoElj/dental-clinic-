@@ -14,120 +14,52 @@ import EditProfile from './Components/Profiles/EditProfile';
 import ViewProfile from './Components/Profiles/ViewProfile';
 import MedicalHistory from './Components/History/MedicalHistory';
 
-// Define the App component
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+        
+        <Route element={<MainLayout />}>
+          <Route path="/superadmin" element={<SuperAdminDashboard />} />
+          <Route path="/doctor" element={<DoctorDashboard />} />
+          <Route path="/accounts" element={<AccountsDashboard />} />
+          <Route path="/dietitian" element={<DietitianDashboard />} />
+          <Route path="/medical-records" element={<MedicalRecords />} />
+          <Route path="/create-record" element={<CreateRecord />} />
+          <Route path="/create-profile" element={<CreateProfile />} />
+          <Route path="/edit-profile/:id" element={<EditProfile />} />
+          <Route path="/view-profile/:id" element={<ViewProfile />} />
+          <Route path="/medical-history/:id" element={<MedicalHistory />} />
+        </Route>
 
-        {/* Dashboard Routes */}
-        <Route
-          path="/superadmin"
-          element={
-            <MainLayout>
-              <SuperAdminDashboard />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/doctor"
-          element={
-            <MainLayout>
-              <DoctorDashboard />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/accounts"
-          element={
-            <MainLayout>
-              <AccountsDashboard />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/dietitian"
-          element={
-            <MainLayout>
-              <DietitianDashboard />
-            </MainLayout>
-          }
-        />
-
-        {/* Records Routes */}
-        <Route
-          path="/medical-records"
-          element={
-            <MainLayout>
-              <MedicalRecords />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/create-record"
-          element={
-            <MainLayout>
-              <CreateRecord />
-            </MainLayout>
-          }
-        />
-
-        {/* Profiles Routes */}
-        <Route
-          path="/create-profile"
-          element={
-            <MainLayout>
-              <CreateProfile />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/edit-profile/:id"
-          element={
-            <MainLayout>
-              <EditProfile />
-            </MainLayout>
-          }
-        />
-        <Route
-          path="/view-profile/:id"
-          element={
-            <MainLayout>
-              <ViewProfile />
-            </MainLayout>
-          }
-        />
-
-        {/* Medical History Route */}
-        <Route
-          path="/medical-history/:id"
-          element={
-            <MainLayout>
-              <MedicalHistory />
-            </MainLayout>
-          }
-        />
-
-        {/* Default Redirect */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );
 };
 
-// Define the MainLayout component
-const MainLayout = ({ children }) => {
+const MainLayout = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-grow p-6 bg-gray-100">
-        {children}
+      <div className="flex-grow">
+        <Routes>
+          <Route path="/superadmin" element={<SuperAdminDashboard />} />
+          <Route path="/doctor" element={<DoctorDashboard />} />
+          <Route path="/accounts" element={<AccountsDashboard />} />
+          <Route path="/dietitian" element={<DietitianDashboard />} />
+          <Route path="/medical-records" element={<MedicalRecords />} />
+          <Route path="/create-record" element={<CreateRecord />} />
+          <Route path="/create-profile" element={<CreateProfile />} />
+          <Route path="/edit-profile/:id" element={<EditProfile />} />
+          <Route path="/view-profile/:id" element={<ViewProfile />} />
+          <Route path="/medical-history/:id" element={<MedicalHistory />} />
+        </Routes>
       </div>
     </div>
   );
 };
 
-// Export the App component
 export default App;
