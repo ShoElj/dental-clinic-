@@ -1,9 +1,7 @@
 import React from 'react';
 import { FaUserMd, FaFileMedical, FaHistory, FaUserPlus, FaSignOutAlt } from "react-icons/fa";
 
-// Define the Sidebar component
 const Sidebar = ({ onSelectTab }) => {
-  // Render the sidebar with navigation options
   return (
     <div className="bg-gray-800 text-white w-64 min-h-screen p-4">
       <div className="flex items-center justify-center py-4">
@@ -39,5 +37,4 @@ const Sidebar = ({ onSelectTab }) => {
   );
 };
 
-// Export the Sidebar component
 export default Sidebar;

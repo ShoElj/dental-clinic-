@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Components/Auth/Login';
 import Logout from './Components/Auth/Logout';
@@ -15,14 +15,16 @@ import ViewProfile from './Components/Profiles/ViewProfile';
 import MedicalHistory from './Components/History/MedicalHistory';
 
 const App = () => {
+  const [selectedTab, setSelectedTab] = useState(0);
+
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
-        
-        <Route element={<MainLayout />}>
-          <Route path="/superadmin" element={<SuperAdminDashboard />} />
+
+        <Route element={<MainLayout selectedTab={selectedTab} onSelectTab={setSelectedTab} />}>
+          <Route path="/superadmin" element={<SuperAdminDashboard selectedTab={selectedTab} onSelectTab={setSelectedTab} />} />
           <Route path="/doctor" element={<DoctorDashboard />} />
           <Route path="/accounts" element={<AccountsDashboard />} />
           <Route path="/dietitian" element={<DietitianDashboard />} />
@@ -40,13 +42,13 @@ const App = () => {
   );
 };
 
-const MainLayout = () => {
+const MainLayout = ({ selectedTab, onSelectTab }) => {
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar onSelectTab={onSelectTab} />
       <div className="flex-grow">
         <Routes>
-          <Route path="/superadmin" element={<SuperAdminDashboard />} />
+          <Route path="/superadmin" element={<SuperAdminDashboard selectedTab={selectedTab} onSelectTab={onSelectTab} />} />
           <Route path="/doctor" element={<DoctorDashboard />} />
           <Route path="/accounts" element={<AccountsDashboard />} />
           <Route path="/dietitian" element={<DietitianDashboard />} />
