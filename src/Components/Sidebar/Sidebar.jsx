@@ -10,7 +10,7 @@ const Sidebar = ({ onSelectTab }) => {
   };
 
   return (
-    <div>
+    <div className="flex">
       {/* Button to toggle sidebar on small screens */}
       <button
         onClick={toggleSidebar}
@@ -87,6 +87,10 @@ const Sidebar = ({ onSelectTab }) => {
           </ul>
         </div>
       </aside>
+      {/* Main content margin adjustment */}
+      <div className="flex-grow sm:ml-64">
+        {/* Content will go here */}
+      </div>
     </div>
   );
 };

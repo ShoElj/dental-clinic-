@@ -7,18 +7,10 @@ import Logout from '../Auth/Logout';
 
 const SuperAdminDashboard = ({ selectedTab, onSelectTab }) => {
   return (
-    <div className="flex-grow p-6 bg-gray-100">
+    <div className="flex flex-col sm:ml-64 p-6 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-4">Super Admin Dashboard</h1>
       <div className="flex-grow p-4">
         <Tabs selectedIndex={selectedTab} onSelect={index => onSelectTab(index)}>
-          <TabList>
-            <Tab>Dashboard</Tab>
-            <Tab>Create a medical record</Tab>
-            <Tab>Access Medical Records</Tab>
-            <Tab>Create Profile</Tab>
-            <Tab>Access Medical History</Tab>
-            <Tab>Logout</Tab>
-          </TabList>
           
           <TabPanel>
             <MedicalRecords create={true} />
