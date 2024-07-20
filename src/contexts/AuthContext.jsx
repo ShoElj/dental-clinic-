@@ -1,3 +1,4 @@
+// src/contexts/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '../services/supabaseClient'; // Importing supabase client for authentication
 
@@ -11,14 +12,23 @@ export const AuthProvider = ({ children }) => {
 
   // Effect to handle authentication state changes
   useEffect(() => {
-    // Fetching the current session
-    const session = supabase.auth.session();
-    setUser(session?.user ?? null); // Setting the user state based on the session
+    // Function to fetch the current session
+    const getSession = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (error) {
+        console.error('Error getting session:', error);
+      } else {
+        const session = data.session;
+        setUser(session?.user ?? null); // Setting the user state based on the session
 
-    // If there's a user in the session, fetch their role
-    if (session?.user) {
-      fetchUserRole(session.user.id);
-    }
+        // If there's a user in the session, fetch their role
+        if (session?.user) {
+          fetchUserRole(session.user.id);
+        }
+      }
+    };
+
+    getSession();
 
     // Setting up a listener for authentication state changes
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {

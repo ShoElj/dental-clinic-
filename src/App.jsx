@@ -5,32 +5,47 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import Login from './Components/Auth/Login';
 import Logout from './Components/Auth/Logout';
 import Sidebar from './Components/Sidebar/Sidebar';
-import Dashboard from './Components/Dashboard/Dashboard';
 import SuperAdminDashboard from './Components/Dashboard/SuperAdminDashboard';
 import DoctorDashboard from './Components/Dashboard/DoctorDashboard';
 import AccountsDashboard from './Components/Dashboard/AccountsDashboard';
 import DietitianDashboard from './Components/Dashboard/DietitianDashboard';
-
+import NotFound from './Components/NotFound'; // Create this component
 
 const App = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </AuthProvider>
+  );
+};
+
+const AppRoutes = () => {
   const { user } = useAuth();
 
+  const getDashboardForRole = (role) => {
+    switch (role) {
+      case 'superadmin': return SuperAdminDashboard;
+      case 'doctor': return DoctorDashboard;
+      case 'accounts': return AccountsDashboard;
+      case 'dietitian': return DietitianDashboard;
+      default: return NotFound;
+    }
+  };
+
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>   
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/" element={<ProtectedRoute element={MainLayout} allowedRoles={['superadmin', 'doctor', 'accounts', 'dietitian']} />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="superadmin" element={<ProtectedRoute element={SuperAdminDashboard} allowedRoles={['superadmin']} />} />
-            <Route path="doctor" element={<ProtectedRoute element={DoctorDashboard} allowedRoles={['doctor']} />} />
-            <Route path="accounts" element={<ProtectedRoute element={AccountsDashboard} allowedRoles={['accounts']} />} />
-            <Route path="dietitian" element={<ProtectedRoute element={DietitianDashboard} allowedRoles={['dietitian']} />} />
-          </Route>
-        </Routes>
-      </AuthProvider>
-    </Router>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/logout" element={<Logout />} />
+      <Route path="/" element={
+        user ? <Navigate to={`/${user.role}`} replace /> : <Navigate to="/login" replace />
+      } />
+      <Route path="/" element={<ProtectedRoute element={MainLayout} allowedRoles={['superadmin', 'doctor', 'accounts', 'dietitian']} />}>
+        <Route path=":role" element={<DynamicDashboard />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
 
@@ -39,14 +54,16 @@ const MainLayout = () => (
     <Sidebar />
     <div className="flex-grow">
       <Routes>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="superadmin" element={<SuperAdminDashboard />} />
-        <Route path="doctor" element={<DoctorDashboard />} />
-        <Route path="accounts" element={<AccountsDashboard />} />
-        <Route path="dietitian" element={<DietitianDashboard />} />
+        <Route path=":role" element={<DynamicDashboard />} />
       </Routes>
     </div>
   </div>
 );
+
+const DynamicDashboard = () => {
+  const { user } = useAuth();
+  const DashboardComponent = getDashboardForRole(user.role);
+  return <DashboardComponent />;
+};
 
 export default App;
