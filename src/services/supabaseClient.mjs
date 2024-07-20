@@ -1,4 +1,3 @@
-// src/services/supabaseClient.mjs
 
 import { createClient } from '@supabase/supabase-js';
 

@@ -1,3 +1,4 @@
+// backend/index.js
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -14,7 +15,8 @@ app.use(cors({
     credentials: true,
     optionsSuccessStatus: 204
 }));
-app.post('/setupUsers', async(req, res) => {
+
+app.post('/setupUsers', async (req, res) => {
     try {
         const hashedSuperAdminPassword = await bcrypt.hash('Super001', 10);
         const hashedDoctorPassword = await bcrypt.hash('Doc002', 10);
@@ -36,7 +38,7 @@ app.post('/setupUsers', async(req, res) => {
     }
 });
 
-app.post('/login', async(req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {

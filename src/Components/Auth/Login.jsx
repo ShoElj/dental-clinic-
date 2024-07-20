@@ -1,4 +1,3 @@
-// src/Components/Auth/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios for making HTTP requests
@@ -23,26 +22,30 @@ const Login = () => {
 
       console.log('Login response:', data);
       // Handle successful login
-      const { role } = data; // Assuming data contains role after successful login
+      if (data.success) {
+        const { role } = data;
 
-      // Navigate to different routes based on user role
-      switch (role) {
-        case 'Super Admin':
-          navigate('/superadmin');
-          break;
-        case 'Doctor':
-          navigate('/doctor');
-          break;
-        case 'Accounts':
-          navigate('/accounts');
-          break;
-        case 'Dietitian':
-          navigate('/dietitian');
-          break;
-        default:
-          // Handle unknown role or default redirection
-          navigate('/');
-          break;
+        // Navigate to different routes based on user role
+        switch (role) {
+          case 'Super Admin':
+            navigate('/superadmin');
+            break;
+          case 'Doctor':
+            navigate('/doctor');
+            break;
+          case 'Accounts':
+            navigate('/accounts');
+            break;
+          case 'Dietitian':
+            navigate('/dietitian');
+            break;
+          default:
+            // Handle unknown role or default redirection
+            navigate('/');
+            break;
+        }
+      } else {
+        setError('Invalid credentials');
       }
     } catch (error) {
       // Set error message if login fails

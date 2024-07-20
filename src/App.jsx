@@ -9,7 +9,7 @@ import SuperAdminDashboard from './Components/Dashboard/SuperAdminDashboard';
 import DoctorDashboard from './Components/Dashboard/DoctorDashboard';
 import AccountsDashboard from './Components/Dashboard/AccountsDashboard';
 import DietitianDashboard from './Components/Dashboard/DietitianDashboard';
-import NotFound from './Components/NotFound'; // Create this component
+import NotFound from './Components/NotFound';
 
 const App = () => {
   return (
@@ -26,44 +26,41 @@ const AppRoutes = () => {
 
   const getDashboardForRole = (role) => {
     switch (role) {
-      case 'superadmin': return SuperAdminDashboard;
-      case 'doctor': return DoctorDashboard;
-      case 'accounts': return AccountsDashboard;
-      case 'dietitian': return DietitianDashboard;
-      default: return NotFound;
+      case 'Super Admin': return <SuperAdminDashboard />;
+      case 'Doctor': return <DoctorDashboard />;
+      case 'Accounts': return <AccountsDashboard />;
+      case 'Dietitian': return <DietitianDashboard />;
+      default: return <NotFound />;
     }
   };
+
+  const DynamicDashboard = () => {
+    const { user } = useAuth();
+    return getDashboardForRole(user.role);
+  };
+
+  const MainLayout = () => (
+    <div className="flex">
+      <Sidebar />
+      <div className="flex-grow">
+        <DynamicDashboard />
+      </div>
+    </div>
+  );
 
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/" element={
-        user ? <Navigate to={`/${user.role}`} replace /> : <Navigate to="/login" replace />
+        user ? <Navigate to={`/${user.role.toLowerCase()}`} replace /> : <Navigate to="/login" replace />
       } />
-      <Route path="/" element={<ProtectedRoute element={MainLayout} allowedRoles={['superadmin', 'doctor', 'accounts', 'dietitian']} />}>
+      <Route path="/" element={<ProtectedRoute element={<MainLayout />} allowedRoles={['Super Admin', 'Doctor', 'Accounts', 'Dietitian']} />}>
         <Route path=":role" element={<DynamicDashboard />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
-};
-
-const MainLayout = () => (
-  <div className="flex">
-    <Sidebar />
-    <div className="flex-grow">
-      <Routes>
-        <Route path=":role" element={<DynamicDashboard />} />
-      </Routes>
-    </div>
-  </div>
-);
-
-const DynamicDashboard = () => {
-  const { user } = useAuth();
-  const DashboardComponent = getDashboardForRole(user.role);
-  return <DashboardComponent />;
 };
 
 export default App;
