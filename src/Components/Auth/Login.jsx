@@ -20,7 +20,7 @@ const Login = () => {
 
     try {
       // Make a POST request to the login endpoint
-      const { data } = await axios.post("http://localhost:5000/login", {
+      const { data } = await axios.post("http://localhost:5000/api/login", {
         username,
         password,
       });
